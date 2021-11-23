@@ -19,9 +19,9 @@ public class DataManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String commandSql = "create table fitness (" +
-                            "idValue integrer primary key autoincrement," +
-                            "nameUser text not null," +
-                            "poundUser int not null" +
+                            "idValue INTEGER primary key autoincrement," +
+                            "nameUser VARCHAR(25) not null," +
+                            "poundUser INTEGER not null" +
                             //"timeDay integrer not null" +
                             ")";
         sqLiteDatabase.execSQL(commandSql);
@@ -35,7 +35,9 @@ public class DataManager extends SQLiteOpenHelper {
     }
 
     public void insertValue(String nameUserUpdate, Integer poundUserUpdate){
-        String commandSql = "insert into fitness (nameUser,poundUser) values (nameUserUpdate,poundUserUpdate)";
+        String nameUser = nameUserUpdate;
+        Integer poundUser = poundUserUpdate;
+        String commandSql = "insert into fitness (nameUser,poundUser) values (nameUser,poundUser)";
         this.getWritableDatabase().execSQL(commandSql);
         Log.i("Database", "insert value");
     }
