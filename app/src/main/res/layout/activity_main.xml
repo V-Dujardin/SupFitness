@@ -24,5 +24,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="send"/>
+    <Button
+        android:id="@+id/showData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="showData"/>
+    <Button
+        android:id="@+id/dropData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dropData"/>
 
 </LinearLayout>

@@ -34,6 +34,8 @@ public class DataManager extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("drop Table if exists " + DATABASE_NAME);
 
     }
 
@@ -43,13 +45,19 @@ public class DataManager extends SQLiteOpenHelper {
         values.put(FITNESS_NAME,nameUserUpdate);
         values.put(FITNESS_POUND,poundUserUpdate);
         db.insert(DATABASE_NAME, null,values);
-
-
     }
 
-    @Override
-    public SQLiteDatabase getWritableDatabase() {
-        return super.getWritableDatabase();
+    public void updateValue(String nameUserUpdate, String poundUserUpdate){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(FITNESS_NAME,nameUserUpdate);
+        values.put(FITNESS_POUND,poundUserUpdate);
+        db.update(DATABASE_NAME,values, "name=?", new String[]{nameUserUpdate});
+    }
+
+    public void deleteAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ DATABASE_NAME);
     }
 
     public Cursor alldata(){
