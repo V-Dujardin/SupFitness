@@ -1,6 +1,9 @@
 package com.example.supfitness.database;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -8,8 +11,13 @@ import android.util.Log;
 public class DataManager extends SQLiteOpenHelper {
 
 
-    private static final String DATABASE_NAME = "fitness.db";
+    private static final String DATABASE_NAME = "fitness";
     private static final int DATABASE_VERSION = 1;
+    private static final String FITNESS_KEY = "fitness_id";
+    private static final String FITNESS_POUND = "pound";
+    private static final String FITNESS_NAME = "name";
+
+
 
     public DataManager(Context context) {
         super(context, DATABASE_NAME,null,DATABASE_VERSION);
@@ -17,15 +25,10 @@ public class DataManager extends SQLiteOpenHelper {
 
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String commandSql = "create table fitness (" +
-                            "idValue INTEGER primary key autoincrement," +
-                            "nameUser VARCHAR(25) not null," +
-                            "poundUser INTEGER not null" +
-                            //"timeDay integrer not null" +
-                            ")";
-        sqLiteDatabase.execSQL(commandSql);
-        Log.i("Database", "database create");
+    public void onCreate(SQLiteDatabase db) {
+        String commandSql = "CREATE TABLE " + DATABASE_NAME + "(" + FITNESS_KEY + " INTEGER PRIMARY KEY AUTOINCREMENT, " + FITNESS_NAME + " TEXT," + FITNESS_POUND + " TEXT)";
+        db.execSQL(commandSql);
+        Log.i("data","Base de donnée créer");
 
     }
 
@@ -34,11 +37,24 @@ public class DataManager extends SQLiteOpenHelper {
 
     }
 
-    public void insertValue(String nameUserUpdate, Integer poundUserUpdate){
-        String nameUser = nameUserUpdate;
-        Integer poundUser = poundUserUpdate;
-        String commandSql = "insert into fitness (nameUser,poundUser) values (nameUser,poundUser)";
-        this.getWritableDatabase().execSQL(commandSql);
-        Log.i("Database", "insert value");
+    public void insertValue(String nameUserUpdate, String poundUserUpdate){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(FITNESS_NAME,nameUserUpdate);
+        values.put(FITNESS_POUND,poundUserUpdate);
+        db.insert(DATABASE_NAME, null,values);
+
+
+    }
+
+    @Override
+    public SQLiteDatabase getWritableDatabase() {
+        return super.getWritableDatabase();
+    }
+
+    public Cursor alldata(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from fitness",null);
+        return cursor;
     }
 }
