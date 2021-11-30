@@ -36,9 +36,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="4ead1588-3ba2-4fbe-b544-014614dbb8bb" object-ref="schemas/main/tables/fitness" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="4ead1588-3ba2-4fbe-b544-014614dbb8bb" />
@@ -51,6 +49,7 @@
       </filter>
     </filter-actions>
     <filter-actions connection-id="4ead1588-3ba2-4fbe-b544-014614dbb8bb" dataset="main.android_metadata" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="4ead1588-3ba2-4fbe-b544-014614dbb8bb" dataset="main.fitness_pound" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -93,7 +92,7 @@
           <port value="" />
           <database value="" />
           <files>
-            <file path="C:\Users\Valentin\Desktop\fitness" schema="main" />
+            <file path="C:\Users\Valentin\Desktop\fitnessDB" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

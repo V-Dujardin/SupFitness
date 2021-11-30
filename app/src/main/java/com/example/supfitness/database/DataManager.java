@@ -1,12 +1,13 @@
 package com.example.supfitness.database;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.example.supfitness.data.PoundModel;
 
 public class DataManager extends SQLiteOpenHelper {
 
@@ -39,12 +40,16 @@ public class DataManager extends SQLiteOpenHelper {
 
     }
 
-    public void insertValue(String nameUserUpdate, String poundUserUpdate){
+    /*public void insertValue(String nameUserUpdate, String poundUserUpdate){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(FITNESS_NAME,nameUserUpdate);
         values.put(FITNESS_POUND,poundUserUpdate);
         db.insert(DATABASE_NAME, null,values);
+    }*/
+
+    public void insertValueInDataBase(PoundModel poundModel){
+
     }
 
     public void updateValue(String nameUserUpdate, String poundUserUpdate){

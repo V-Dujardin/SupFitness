@@ -6,33 +6,60 @@
     android:orientation="vertical"
     tools:context=".home.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
 
-    <TextView
-        android:id="@+id/userValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter une valeur"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"/>
 
-    <EditText
-        android:id="@+id/nameUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prenom" />
+        <EditText
+            android:id="@+id/nameUser"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poids"
+            android:paddingRight="50dp"
+            android:paddingLeft="5dp"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/sendButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="send"/>
-    <Button
-        android:id="@+id/showData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="showData"/>
-    <Button
-        android:id="@+id/dropData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="dropData"/>
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="envoyer"
+            android:layout_marginRight="5dp"/>
+        <Button
+            android:id="@+id/showData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="afficher"
+            android:layout_marginRight="5dp"/>
+        <Button
+            android:id="@+id/dropData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="supprimer"
+            />
+
+    </LinearLayout>
+
+
+
+
 
 </LinearLayout>
