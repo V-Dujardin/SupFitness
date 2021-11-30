@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,57 +10,55 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="Ajouter une valeur"
-            android:textSize="20sp"
-            android:layout_marginBottom="20dp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/nameUser"
-            android:inputType="number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Poids"
+            android:inputType="number"
+            android:paddingLeft="5dp"
             android:paddingRight="50dp"
-            android:paddingLeft="5dp"/>
+            android:text="Poids" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="envoyer"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            android:text="envoyer" />
+
         <Button
             android:id="@+id/showData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="afficher"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            android:text="afficher" />
+
         <Button
             android:id="@+id/dropData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="supprimer"
-            />
+            android:text="supprimer" />
 
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>
