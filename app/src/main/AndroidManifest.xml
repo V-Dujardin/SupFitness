@@ -10,12 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SupFitness">
         <activity
+            android:name=".pages.Map"
+            android:exported="false" />
+        <activity
+            android:name=".pages.Home"
+            android:exported="false" />
+        <activity
+            android:name=".pages.Values"
+            android:exported="false" />
+        <activity
             android:name=".menuStyle"
             android:exported="false"
             android:label="@string/title_activity_menu_style"
             android:theme="@style/Theme.SupFitness.NoActionBar" />
         <activity
-            android:name=".home.MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
