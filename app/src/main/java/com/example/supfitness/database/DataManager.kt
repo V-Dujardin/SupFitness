@@ -56,7 +56,7 @@ class DataManager(context: Context?) :
                     pound = cursor.getInt(cursor.getColumnIndex("pound"))
                     time = cursor.getInt(cursor.getColumnIndex("time"))
                     val pound = PoundModel(pound, time)
-                    poundList.add(pound)
+                    poundList.add(0,pound)
                 } while (cursor.moveToNext())
 
             }

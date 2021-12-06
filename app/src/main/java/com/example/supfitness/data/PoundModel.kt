@@ -4,5 +4,4 @@ data class PoundModel(
     var pound: Int,
     var time: Int,
 
-
 )

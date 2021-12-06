@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.Values">
+    tools:context=".pages.Values"
+    android:layout_marginBottom="30dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,6 +19,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp">
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,14 +27,29 @@
                 android:textSize="20sp"
                 android:layout_marginBottom="20dp"/>
 
-            <EditText
-                android:id="@+id/nameUser"
-                android:inputType="number"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Poids"
-                android:paddingRight="50dp"
-                android:paddingLeft="5dp"/>
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/nameUser"
+                    android:inputType="number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Poids"
+                    android:paddingRight="50dp"
+                    android:paddingLeft="5dp"/>
+
+                <Button
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/sendButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="send" />
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -41,12 +58,6 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/sendButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="envoyer"
-                android:layout_marginRight="5dp"/>
             <Button
                 android:id="@+id/showData"
                 android:layout_width="wrap_content"
@@ -61,7 +72,24 @@
                 />
 
         </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            >
+
+            <fragment
+                android:id="@+id/fragmentContainerView"
+                android:name="com.example.supfitness.Recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/model_pound"
+                />
+        </ScrollView>
+
     </LinearLayout>
+
 
 
 </RelativeLayout>
