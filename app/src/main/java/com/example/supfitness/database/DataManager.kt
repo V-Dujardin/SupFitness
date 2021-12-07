@@ -18,12 +18,13 @@ class DataManager(context: Context?) :
         private const val ID = "id_pound"
         private const val NAME = "pound"
         private const val TIME = "time"
+        private const val HOUR = "hour"
     }
 
 
     override fun onCreate(db: SQLiteDatabase?) {
         val generateTable =
-            ("CREATE TABLE $TABLEAU_FITNESS($ID INTEGER PRIMARY KEY AUTOINCREMENT,$NAME TEXT,$TIME TIME)")
+            ("CREATE TABLE $TABLEAU_FITNESS($ID INTEGER PRIMARY KEY AUTOINCREMENT,$NAME TEXT,$TIME TEXT, $HOUR TEXT)")
         db?.execSQL(generateTable)
     }
 
@@ -36,7 +37,8 @@ class DataManager(context: Context?) :
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(NAME, pound.pound)
-        values.put(TIME, pound.time)
+        values.put(TIME, pound.date)
+        values.put(HOUR, pound.hour)
         val insert = db.insert(TABLEAU_FITNESS, null, values)
         db.close()
         return insert
@@ -48,20 +50,32 @@ class DataManager(context: Context?) :
         val db = this.readableDatabase
         val cursor: Cursor? = db.rawQuery("SELECT * FROM $TABLEAU_FITNESS", null)
         var pound: Int
-        var time: Int
+        var id: Int
+        var date: String
+        var hour: String
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     pound = cursor.getInt(cursor.getColumnIndex("pound"))
-                    time = cursor.getInt(cursor.getColumnIndex("time"))
-                    val pound = PoundModel(pound, time)
-                    poundList.add(0,pound)
+                    date = cursor.getString(cursor.getColumnIndex("time"))
+                    hour = cursor.getString(cursor.getColumnIndex("hour"))
+                    id = cursor.getInt(cursor.getColumnIndex("id_pound"))
+                    val newPound = PoundModel(id, pound, date, hour)
+                    poundList.add(0,newPound)
                 } while (cursor.moveToNext())
 
             }
         }
 
         return poundList
+    }
+
+    fun deleteData(id: Int?): Int {
+
+        val db = this.writableDatabase
+        val cursor = db.delete(TABLEAU_FITNESS, "$ID = ?", arrayOf(id.toString()))
+        db.close()
+        return cursor
     }
 }

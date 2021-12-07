@@ -1,6 +1,5 @@
 package com.example.supfitness.pages
 
-import android.icu.number.Precision.integer
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,7 +25,7 @@ class Values : Fragment(R.layout.fragment_values) {
     private lateinit var dataManager: DataManager
     private lateinit var recyclerView: RecyclerView
     private var adapter: ItemAdapter? = null
-
+    private lateinit var recupInputFromEditText: EditText
 
 
     override fun onCreateView(
@@ -34,24 +33,17 @@ class Values : Fragment(R.layout.fragment_values) {
     ): View {
         super.onCreate(savedInstanceState)
 
-
-
         val rootView: View = inflater.inflate(R.layout.fragment_values, container, false)
-        val recupInputFromEditText: EditText = rootView.findViewById(R.id.nameUser)
+        recupInputFromEditText = rootView.findViewById(R.id.nameUser)
         val sendButton: Button = rootView.findViewById(R.id.sendButton)
         val showData: Button = rootView.findViewById(R.id.showData)
-        val dropData: Button = rootView.findViewById(R.id.dropData)
         dataManager = DataManager(this.context)
 
         // Recycler view
         recyclerView = rootView.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        adapter = ItemAdapter()
+        adapter = ItemAdapter(context)
         recyclerView.adapter = adapter
-
-
-
-
 
         // Show data
         getValuesPound()
@@ -60,8 +52,8 @@ class Values : Fragment(R.layout.fragment_values) {
         sendButton.setOnClickListener {
             if (recupInputFromEditText.text.isNotEmpty()) {
                 val inputUser = recupInputFromEditText.text
-                val stringToIntInputUser = Integer.parseInt(inputUser.toString())
-                addPoundInData(stringToIntInputUser)
+                val changeInputUserIntoInt: Int = Integer.parseInt(inputUser.toString())
+                addPoundInData(changeInputUserIntoInt)
                 getValuesPound()
                 recupInputFromEditText.setText("")
 
@@ -75,33 +67,54 @@ class Values : Fragment(R.layout.fragment_values) {
             getValuesPound()
         }
 
-        dropData.setOnClickListener {
-            val current = LocalDateTime.now()
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-            val formatted = current.format(formatter)
-            Log.d("data", formatted.toString())
-        }
-
         return rootView
     }
 
 
     private fun addPoundInData(inputUser: Int) {
-        val newPound = PoundModel(inputUser, 3)
+        val current = LocalDateTime.now() // Heure actuelle
+        val formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm")
+        val formatted = current.format(formatter).toString()
+        val dateCompleteFormatter = setUpTime(formatted)
+        val newPound = PoundModel(id,inputUser, dateCompleteFormatter , formatted.takeLast(5))
         val addPoundInDatabase = dataManager.insertValueInDataBase(newPound)
         if (addPoundInDatabase > -1) {
             Toast.makeText(requireContext(), "Poids ajouter", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun getAllValuesFromDatabase() {
-        val value = dataManager.getAllValue()
-        Log.e("data", "${value.size}")
+    private fun setUpTime(time: String): String {
+        val mouth = changeEditMouth(time.substring(8, 10))
+        val day = time.substring(5, 7)
+        val year = time.take(4)
+
+        Log.e("Date actuelle", time)
+        Log.e("Jour", day)
+        Log.e("Année", year)
+        Log.e("mois", mouth)
+        return "$day $mouth $year"
     }
 
-    private fun getValuesPound(){
-        val poundList  = dataManager.getAllValue()
-        getAllValuesFromDatabase()
+    private fun changeEditMouth(mouth: String): String {
+        when (mouth) {
+            "01" -> return "janv."
+            "02" -> return "frév."
+            "03" -> return "mars."
+            "04" -> return "mai."
+            "05" -> return "avril."
+            "06" -> return "juin."
+            "07" -> return "juil."
+            "08" -> return "août."
+            "09" -> return "sept."
+            "10" -> return "oct."
+            "11" -> return "nov."
+            "12" -> return "dec."
+        }
+        return mouth
+    }
+
+    private fun getValuesPound() {
+        val poundList = dataManager.getAllValue()
         adapter?.addItems(poundList)
     }
 
