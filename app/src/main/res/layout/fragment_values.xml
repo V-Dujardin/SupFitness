@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.Values"
+    android:background="@color/grey"
+    android:layout_marginBottom="30dp">
+
+    <LinearLayout
+        android:id="@+id/topLinearLayout"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ajouter une valeur"
+                android:textSize="20sp"
+                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/nameUser"
+                    android:inputType="number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Poids"
+                    android:paddingRight="50dp"
+                    android:paddingLeft="5dp"/>
+
+                <Button
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/sendButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="send" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/showData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="afficher"
+                android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/dropData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="supprimer"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topLinearLayout"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="30dp">
+
+        <fragment
+            android:id="@+id/fragmentContainerView"
+            android:name="com.example.supfitness.Recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/model_pound" />
+    </ScrollView>
+
+
+
+</RelativeLayout>
