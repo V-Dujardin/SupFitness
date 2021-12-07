@@ -6,7 +6,13 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.supfitness.data.PoundModel
+import java.sql.Time
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class DataManager(context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -20,7 +26,6 @@ class DataManager(context: Context?) :
         private const val TIME = "time"
         private const val HOUR = "hour"
     }
-
 
     override fun onCreate(db: SQLiteDatabase?) {
         val generateTable =
@@ -67,15 +72,48 @@ class DataManager(context: Context?) :
 
             }
         }
-
         return poundList
     }
 
     fun deleteData(id: Int?): Int {
-
         val db = this.writableDatabase
         val cursor = db.delete(TABLEAU_FITNESS, "$ID = ?", arrayOf(id.toString()))
         db.close()
         return cursor
+    }
+
+    @SuppressLint("Recycle")
+    fun checkIfDateExist(): Boolean {
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm")
+        val formatted = setUpTime(current.format(formatter).toString())
+        val db = this.readableDatabase
+        val check = db.rawQuery("SELECT * FROM $TABLEAU_FITNESS WHERE $TIME = '$formatted'", null)
+        return check.count == 0
+    }
+
+    private fun setUpTime(time: String): String {
+        val mouth = changeEditMouth(time.substring(8, 10))
+        val day = time.substring(5, 7)
+        val year = time.take(4)
+        return "$day $mouth $year"
+    }
+
+    private fun changeEditMouth(mouth: String): String {
+        when (mouth) {
+            "01" -> return "janv."
+            "02" -> return "frév."
+            "03" -> return "mars."
+            "04" -> return "mai."
+            "05" -> return "avril."
+            "06" -> return "juin."
+            "07" -> return "juil."
+            "08" -> return "août."
+            "09" -> return "sept."
+            "10" -> return "oct."
+            "11" -> return "nov."
+            "12" -> return "dec."
+        }
+        return mouth
     }
 }

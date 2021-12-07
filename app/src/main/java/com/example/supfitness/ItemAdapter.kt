@@ -46,7 +46,6 @@ class ItemAdapter(context: Context?) : RecyclerView.Adapter<ItemAdapter.ItemAdap
         holder.bindView(pound)
         holder.buttonDelete.setOnClickListener{
             getId(pound.id)
-            Log.e("info",pound.id.toString())
             this.poundList.removeAt(position)
             dataManager.deleteData(pound.id)
             notifyDataSetChanged()

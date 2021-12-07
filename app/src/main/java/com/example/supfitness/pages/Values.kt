@@ -21,12 +21,10 @@ import java.time.format.DateTimeFormatter
 
 class Values : Fragment(R.layout.fragment_values) {
 
-
     private lateinit var dataManager: DataManager
     private lateinit var recyclerView: RecyclerView
     private var adapter: ItemAdapter? = null
     private lateinit var recupInputFromEditText: EditText
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -36,7 +34,6 @@ class Values : Fragment(R.layout.fragment_values) {
         val rootView: View = inflater.inflate(R.layout.fragment_values, container, false)
         recupInputFromEditText = rootView.findViewById(R.id.nameUser)
         val sendButton: Button = rootView.findViewById(R.id.sendButton)
-        val showData: Button = rootView.findViewById(R.id.showData)
         dataManager = DataManager(this.context)
 
         // Recycler view
@@ -48,25 +45,24 @@ class Values : Fragment(R.layout.fragment_values) {
         // Show data
         getValuesPound()
 
-
         sendButton.setOnClickListener {
-            if (recupInputFromEditText.text.isNotEmpty()) {
-                val inputUser = recupInputFromEditText.text
-                val changeInputUserIntoInt: Int = Integer.parseInt(inputUser.toString())
-                addPoundInData(changeInputUserIntoInt)
-                getValuesPound()
-                recupInputFromEditText.setText("")
+            if (dataManager.checkIfDateExist()){
+                if (recupInputFromEditText.text.isNotEmpty()) {
+                    val inputUser = recupInputFromEditText.text
+                    val changeInputUserIntoInt: Int = Integer.parseInt(inputUser.toString())
+                    addPoundInData(changeInputUserIntoInt)
+                    getValuesPound()
+                    recupInputFromEditText.setText("")
 
+                } else {
+                    Toast.makeText(requireContext(), "Merci de rentrer une valeur", Toast.LENGTH_SHORT)
+                        .show()
+                }
             } else {
-                Toast.makeText(requireContext(), "Merci de rentrer une valeur", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Une seule valeur par jour", Toast.LENGTH_LONG)
                     .show()
             }
         }
-
-        showData.setOnClickListener {
-            getValuesPound()
-        }
-
         return rootView
     }
 
@@ -87,11 +83,6 @@ class Values : Fragment(R.layout.fragment_values) {
         val mouth = changeEditMouth(time.substring(8, 10))
         val day = time.substring(5, 7)
         val year = time.take(4)
-
-        Log.e("Date actuelle", time)
-        Log.e("Jour", day)
-        Log.e("Année", year)
-        Log.e("mois", mouth)
         return "$day $mouth $year"
     }
 
