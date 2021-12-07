@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SupFitness">
         <activity
+
             android:name=".pages.Map"
             android:exported="false" />
         <activity
@@ -17,6 +18,12 @@
             android:exported="false" />
         <activity
             android:name=".pages.Values"
+
+            android:name=".ThirdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SecondActivity"
+
             android:exported="false" />
         <activity
             android:name=".menuStyle"

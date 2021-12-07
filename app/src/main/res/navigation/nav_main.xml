@@ -20,4 +20,21 @@
         android:name="com.example.supfitness.pages.Values"
         android:label="Compte"
         tools:layout="@layout/fragment_values" />
+    android:id="@+id/nav_main">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.example.supfitness.map"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/weight"
+        android:name="com.example.supfitness.weight"
+        android:label="fragment_weight"
+        tools:layout="@layout/fragment_weight" />
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.example.supfitness.home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>

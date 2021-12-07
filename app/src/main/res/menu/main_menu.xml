@@ -13,5 +13,16 @@
         android:id="@+id/valuesFragmentNav"
         android:icon="@drawable/ic_baseline_person"
         android:title="Compte" />
+        android:id="@+id/mainActivity"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/secondActivity"
+        android:icon="@drawable/ic_baseline"
+        android:title="Poids" />
+    <item
+        android:id="@+id/thirdActivity"
+        android:icon="@drawable/ic_map"
+        android:title="Carte" />
 
 </menu>
