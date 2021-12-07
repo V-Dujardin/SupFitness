@@ -5,5 +5,4 @@ data class PoundModel(
     var pound: Int,
     var date: String,
     var hour: String
-
     )
