@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/homeFragmentNav">
+    app:startDestination="@id/valuesFragmentNav">
 
     <fragment
         android:id="@+id/mapFragmentNav"
@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/homeFragmentNav"
-        android:name="com.example.supfitness.pages.Home"
+        android:name="com.example.supfitness.pages.Health"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_health" />
     <fragment
         android:id="@+id/valuesFragmentNav"
         android:name="com.example.supfitness.pages.Values"

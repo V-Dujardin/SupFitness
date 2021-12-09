@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CalendarView
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import com.example.supfitness.data.PoundModel
 import com.example.supfitness.database.DataManager
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class Values : Fragment(R.layout.fragment_values) {
@@ -72,7 +74,11 @@ class Values : Fragment(R.layout.fragment_values) {
         val formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm")
         val formatted = current.format(formatter).toString()
         val dateCompleteFormatter = setUpTime(formatted)
-        val newPound = PoundModel(id,inputUser, dateCompleteFormatter , formatted.takeLast(5))
+        val instantT: Calendar = Calendar.getInstance()
+        val dateEnMilli: Long = instantT.timeInMillis
+
+
+        val newPound = PoundModel(id, inputUser, dateCompleteFormatter, formatted.takeLast(5), dateEnMilli)
         val addPoundInDatabase = dataManager.insertValueInDataBase(newPound)
         if (addPoundInDatabase > -1) {
             Toast.makeText(requireContext(), "Poids ajouter", Toast.LENGTH_SHORT).show()

@@ -37,7 +37,7 @@
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".pages.Home"
+            android:name=".pages.Health"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity

@@ -7,12 +7,11 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.supfitness.data.PoundModel
-import java.sql.Time
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DataManager(context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -25,11 +24,12 @@ class DataManager(context: Context?) :
         private const val NAME = "pound"
         private const val TIME = "time"
         private const val HOUR = "hour"
+        private const val DATE = "date"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
         val generateTable =
-            ("CREATE TABLE $TABLEAU_FITNESS($ID INTEGER PRIMARY KEY AUTOINCREMENT,$NAME TEXT,$TIME TEXT, $HOUR TEXT)")
+            ("CREATE TABLE $TABLEAU_FITNESS($ID INTEGER PRIMARY KEY AUTOINCREMENT,$NAME TEXT,$TIME TEXT, $HOUR TEXT, $DATE LONG)")
         db?.execSQL(generateTable)
     }
 
@@ -42,8 +42,9 @@ class DataManager(context: Context?) :
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(NAME, pound.pound)
-        values.put(TIME, pound.date)
+        values.put(TIME, pound.time)
         values.put(HOUR, pound.hour)
+        values.put(DATE, pound.date)
         val insert = db.insert(TABLEAU_FITNESS, null, values)
         db.close()
         return insert
@@ -56,17 +57,19 @@ class DataManager(context: Context?) :
         val cursor: Cursor? = db.rawQuery("SELECT * FROM $TABLEAU_FITNESS", null)
         var pound: Int
         var id: Int
-        var date: String
+        var time: String
         var hour: String
+        var date: Long
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     pound = cursor.getInt(cursor.getColumnIndex("pound"))
-                    date = cursor.getString(cursor.getColumnIndex("time"))
+                    time = cursor.getString(cursor.getColumnIndex("time"))
                     hour = cursor.getString(cursor.getColumnIndex("hour"))
                     id = cursor.getInt(cursor.getColumnIndex("id_pound"))
-                    val newPound = PoundModel(id, pound, date, hour)
+                    date = cursor.getLong(cursor.getColumnIndex("date"))
+                    val newPound = PoundModel(id, pound, time, hour, date)
                     poundList.add(0,newPound)
                 } while (cursor.moveToNext())
 
@@ -90,6 +93,34 @@ class DataManager(context: Context?) :
         val db = this.readableDatabase
         val check = db.rawQuery("SELECT * FROM $TABLEAU_FITNESS WHERE $TIME = '$formatted'", null)
         return check.count == 0
+    }
+
+    @SuppressLint("Range")
+    fun takeAllValueInMouth(minValue: Long, maxValue: Long): ArrayList<PoundModel> {
+        val poundListMouth: ArrayList<PoundModel> = ArrayList()
+        val db = this.readableDatabase
+        val cursor: Cursor? = db.rawQuery("SELECT * FROM $TABLEAU_FITNESS  WHERE $TIME BETWEEN '$minValue' AND '$maxValue'" , null)
+        var pound: Int
+        var id: Int
+        var time: String
+        var hour: String
+        var date: Long
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    pound = cursor.getInt(cursor.getColumnIndex("pound"))
+                    time = cursor.getString(cursor.getColumnIndex("time"))
+                    hour = cursor.getString(cursor.getColumnIndex("hour"))
+                    id = cursor.getInt(cursor.getColumnIndex("id_pound"))
+                    date = cursor.getLong(cursor.getColumnIndex("date"))
+                    val newPound = PoundModel(id, pound, time, hour, date)
+                    poundListMouth.add(newPound)
+                } while (cursor.moveToNext())
+
+            }
+        }
+        return poundListMouth
     }
 
     private fun setUpTime(time: String): String {

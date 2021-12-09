@@ -31,7 +31,7 @@ class ItemAdapter(context: Context?) : RecyclerView.Adapter<ItemAdapter.ItemAdap
         var buttonDelete: ImageButton = view.findViewById(R.id.buttonDelete)
 
         fun bindView(pound : PoundModel){
-            date.text = pound.date
+            date.text = pound.time
             time.text = pound.hour
             getPound.text = pound.pound.toString()
         }
