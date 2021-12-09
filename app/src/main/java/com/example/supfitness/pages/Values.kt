@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.supfitness.ItemAdapter
@@ -35,7 +32,7 @@ class Values : Fragment(R.layout.fragment_values) {
 
         val rootView: View = inflater.inflate(R.layout.fragment_values, container, false)
         recupInputFromEditText = rootView.findViewById(R.id.nameUser)
-        val sendButton: Button = rootView.findViewById(R.id.sendButton)
+        val sendButton: ImageButton = rootView.findViewById(R.id.sendButton)
         dataManager = DataManager(this.context)
 
         // Recycler view
