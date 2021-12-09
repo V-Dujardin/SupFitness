@@ -96,10 +96,10 @@ class DataManager(context: Context?) :
     }
 
     @SuppressLint("Range")
-    fun takeAllValueInMouth(minValue: Long, maxValue: Long): ArrayList<PoundModel> {
+    fun takeAllValueInMouth(millisValues: Long): ArrayList<PoundModel> {
         val poundListMouth: ArrayList<PoundModel> = ArrayList()
         val db = this.readableDatabase
-        val cursor: Cursor? = db.rawQuery("SELECT * FROM $TABLEAU_FITNESS  WHERE $TIME BETWEEN '$minValue' AND '$maxValue'" , null)
+        val cursor: Cursor? = db.rawQuery("SELECT * FROM $TABLEAU_FITNESS  WHERE $DATE >= '$millisValues'" , null)
         var pound: Int
         var id: Int
         var time: String

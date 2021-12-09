@@ -5,10 +5,40 @@
     android:layout_height="match_parent"
     tools:context=".pages.Health">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/top">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Courbe de suivi"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/textViewDeux"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sur 30 jours "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/graphique"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        />
+        android:layout_height="match_parent"
+        android:layout_below="@id/top"
+        android:layout_marginTop="21dp"
+        android:visibility="visible" />
 
 </RelativeLayout>

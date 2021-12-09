@@ -8,10 +8,10 @@
     <item
         android:id="@+id/valuesFragmentNav"
         android:icon="@drawable/ic_baseline_person"
-        android:title="Compte" />
+        android:title="Profile" />
     <item
         android:id="@+id/homeFragmentNav"
-        android:icon="@drawable/ic_baseline_home"
+        android:icon="@drawable/ic_baseline_timeline"
         android:title="Health" />
 
 </menu>
